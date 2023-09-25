@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style type="text/css">
+
+    body{
+        background-color: rgb(220, 220, 220);
+    }
+
+    form input.limpar{
+        width: 75px;
+        background-color: rgb(255, 0, 0);
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+    }
+
+    form input.oper{
+        width: 75px;
+        background-color: rgb(173, 216, 230);
+        font-weight: bold;
+    }
+
+    form label.num{
+        color: rgb(0,0,255);
+        font-weight: bold;
+    }
+
+    form label.res{
+        color: rgb(255, 0, 0);
+        font-weight: bold;
+    }
+
+</style>
+
+<script type="text/javascript">
+
+    function Limpar(){
+
+        document.calculadora.num1.value="";
+
+        document.calculadora.num2.value="";
+
+        document.calculadora.resultado.value="";
+
+        delete valor1;
+
+        delete valor2;
+
+        delete valor;
+
+    }
+
+    function Calcula(oper){
+
+        var valor1=document.calculadora.num1.value;
+
+        var valor2 = document.calculadora.num2.value
+
+        if(oper == "somar"){
+            var valor = parseFloat(valor1)+parseFloat(valor2);
+        }
+
+        else if(oper=="subtrair"){
+            var valor = parseFloat(valor1)-parseFloat(valor2);
+        }
+
+        else if(oper=="multiplicar"){
+            var valor = parseFloat(valor1)*parseFloat(valor2);
+        }
+
+        else if(oper=="dividir"){
+            if(parseFloat(valor2)==0){
+                alert('Divisao por 0 nao existe');
+            }
+            else{
+                var valor = parseFloat(valor1)/parseFloat(valor2);
+            }
+        }
+
+        else if(oper=="quadrado"){
+            var valor=parseFloat(valor1)*parseFloat(valor1);
+        }
+
+        else if(oper=="potencia"){
+            var valor=Math.pow(parseFloat(valor1), parseFloat(valor2));
+        }
+
+        else if(oper=="raiz"){
+            var valor=Math.sqrt(parseFloat(valor1));
+        }
+
+        document.calculadora.resultado.value=valor;
+
+    }
+
+</script>
+
+<body>
+   
+    <form name="calculadora" method="post" action="">
+        <fieldset>
+            <legend>Calculadora</legend>
+            <table>
+                <tbody>
+
+                    <tr>
+                        <td><label class="num" for="num1">1º Num</label></td>
+                        <td><input name="num1" id="num1" type="text" size="6"></td>
+                        <td><input name="somar" class="oper" value="+" onclick="Calcula('somar')" type="button"></td>
+                        <td><input name="subtrair" class="oper" value="-" onclick="Calcula('subtrair')" type="button"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="num" for="num2">2º Num</label></td>
+                        <td><input name="num2" id="num2" type="text" size="6"></td>
+                        <td><input name="multiplicar" class="oper" type="button" value="*" onclick="Calcula('multiplicar')"></td>
+                        <td><input name="dividir" class="oper" type="button" value="/" onclick="Calcula('dividir')"></td>
+
+                    </tr>
+                    <tr>
+                        <td><label class="res" for="resultado">Resultado</label></td>
+                        <td><input name="resultado" id="resultado" type="text" readonly="true" size="6"></td>
+                        <td><input name="quadrado" class="oper" value="Quadrado" onclick="Calcula('quadrado')" type="button"></td>
+                        <td><input name="potencia" class="oper" value="Potencia" onclick="Calcula('potencia')" type="button"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><input name="raiz" class="oper" value="Raiz" type="button" onclick="Calcula('raiz')"></td>
+                        <td><input name="limpar" class="limpar" type="button" onclick="Limpar()" value="Limpar"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
+</body>
+</html>
